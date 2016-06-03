@@ -43,11 +43,6 @@ module ROM
         ((combine? || composite?) ? relation : (relation >> mapper)).call(*args)
       end
 
-      # @api private
-      def changeset(input)
-        Changeset.new(relation, input)
-      end
-
       # Map this relation with other mappers too
       #
       # @api public

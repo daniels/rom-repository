@@ -99,15 +99,9 @@ module ROM
 
           plugins.each { |plugin| klass.use(plugin) }
 
-          # TODO: this should be baked into rom core probably
-          input =
-            if relation.schema?
-              -> data { Types::Hash.schema(relation.schema.attributes)[Hash[data]] }
-            else
-              Hash
-            end
-
-          registry[name][type] = klass.build(relation, result: result, input: input)
+          registry[name][type] = klass.build(
+            relation, result: result, input: relation.schema_processor
+          )
         end
       end
     end
